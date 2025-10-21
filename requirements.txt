@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+sqlalchemy
+pymysql
+python-dotenv
+boto3
+pymupdf
+sentence-transformers
+faiss-cpu
+chromadb
