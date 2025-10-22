@@ -9,7 +9,7 @@ class User(base):
     name = Column(String(50))
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
-    chats = relationship("Chat", back_populates="users")
+    chats = relationship("Chat", back_populates="user")
 
 class Chat(base):
     __tablename__ = "chats"
@@ -21,3 +21,12 @@ class Chat(base):
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
     user= relationship("User", back_populates="chats")
+
+class Document(base):
+    __tablename__= "documents"
+
+    id= Column(Integer,primary_key=True, index=True)
+    filename = Column(String(255))
+    s3_url = Column(String(512))
+    local_path = Column(String(255))
+    created_at = Column(DateTime(timezone=True),server_default=func.now())
