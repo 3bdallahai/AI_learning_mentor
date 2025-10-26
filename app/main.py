@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from app.db import models
 from app.db.database import engine
-from app.routes import health,upload, query
+from app.routes import health,upload, query, documents
 
 #create tables in MySQL 
 models.base.metadata.create_all(bind= engine)
@@ -12,6 +12,7 @@ app = FastAPI(title= "AI Learning mentor API")
 app.include_router(health.router, prefix="/api")
 app.include_router(upload.router, prefix="/api")
 app.include_router(query.router, prefix="/api")
+app.include_router(documents.router, prefix="/api")
 
 
 
