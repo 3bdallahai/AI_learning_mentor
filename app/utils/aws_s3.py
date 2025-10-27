@@ -19,4 +19,10 @@ def upload_to_s3(file_path: str, object_name:str = None ):
     file_url = f"https://{bucket}.s3.{settings.AWS_REGION}.amazonaws.com/{object_name}"
     return file_url
 
+def delete_from_s3(s3_url:str):
+    s3 = get_s3_client()
+    bucket = settings.AWS_BUCKET_NAME
+    key = s3_url.split(f".com/")[-1]
+    s3.delete_object(Bucket = bucket, Key=key)
+    print(f"Deleting from bucket={bucket}, key={key}")
 

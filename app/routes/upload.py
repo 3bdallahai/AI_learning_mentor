@@ -8,7 +8,7 @@ from app.db.database import get_db
 from app.db import models
 from sqlalchemy.orm import session
 
-router = APIRouter()
+router = APIRouter(prefix="/documents", tags=["Documents"])
 
 
 UPLOAD_DIR = "data"
