@@ -24,5 +24,5 @@ def delete_from_s3(s3_url:str):
     bucket = settings.AWS_BUCKET_NAME
     key = s3_url.split(f".com/")[-1]
     s3.delete_object(Bucket = bucket, Key=key)
-    print(f"Deleting from bucket={bucket}, key={key}")
+
 

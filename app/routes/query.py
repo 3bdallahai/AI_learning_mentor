@@ -44,7 +44,6 @@ async def query_document(request: QueryRequest, db: session = Depends(get_db)):
         db.add(entry)
         db.commit()
 
-        print(response)
         return {"answer":response, "source":"llm"}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"query processing failed: {str(e)}")
