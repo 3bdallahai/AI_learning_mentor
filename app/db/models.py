@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Text, func
+from sqlalchemy import Column, Integer, Float,String, DateTime, ForeignKey, Text, func
 from sqlalchemy.orm import relationship
 from app.db.database import base
 
@@ -30,3 +30,15 @@ class Document(base):
     s3_url = Column(String(512))
     local_path = Column(String(255))
     created_at = Column(DateTime(timezone=True),server_default=func.now())
+
+
+class QueryCache(base):
+    __tablename__ = "query_cache"
+
+    id = Column(Integer, primary_key=True, index=True)
+    question = Column(Text, nullable=False)
+    answer = Column(Text, nullable=False)
+    embedding_path = Column(String(255))
+    smiliarty = Column(Float, default=1.0)
+    created_at = Column(DateTime(timezone=True),server_default=func.now())
+
