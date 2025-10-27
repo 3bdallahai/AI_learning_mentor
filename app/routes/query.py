@@ -49,3 +49,14 @@ async def query_document(request: QueryRequest, db: session = Depends(get_db)):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"query processing failed: {str(e)}")
     
+
+
+@router.delete("/clearcache")
+def clear_cache(db: session=Depends(get_db)):
+    try:
+        deleted = db.query(QueryCache).delete()
+        db.commit()
+        return {"message": f"Cleared {deleted} cache queries"}
+    except Exception as e:
+        db.rollback()
+        raise HTTPException(status_code=500, detail=f"failed to delete cahce {str(e)}")

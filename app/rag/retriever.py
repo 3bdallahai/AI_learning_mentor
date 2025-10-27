@@ -7,6 +7,8 @@ def retrieve_relevant_chunks(doc_name,query,top_k=3):
 
     query_vector = np.array(create_embedding([query])).astype("float32")
 
+    query_vector /= np.linalg.norm(query_vector, axis=1, keepdims=True)
+
     _,indices = index.search(query_vector,top_k)
 
     retrieved_chunks = [chunks[i] for i in indices[0]]

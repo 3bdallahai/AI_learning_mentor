@@ -8,7 +8,9 @@ os.makedirs(VECTORS_DIR,exist_ok=True)
 
 def save_vectors(embeddings, chunks, doc_name):
     embeddings =np.array(embeddings).astype("float32")
-    index = faiss.IndexFlatL2(embeddings.shape[1])
+    norm = np.linalg.norm(embeddings, axis=1, keepdims=True)
+    embeddings =embeddings/norm
+    index = faiss.IndexFlatIP(embeddings.shape[1])
     index.add(embeddings)
 
     faiss.write_index(index,f"{VECTORS_DIR}/{doc_name}.index")
